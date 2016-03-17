@@ -69,20 +69,23 @@ SRCS = ft_memset.c \
 		ft_lstnew.c \
 		ft_strdeld.c
 
-SRCSO = $(SRCS:.c=.o)
+OBJ = $(SRCS:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -c
+FLAGS = -Wall -Wextra -Werror
 
+CC = gcc
 
 all : $(NAME)
 
-$(NAME) :
-	@gcc $(FLAGS) $(SRCS) -I.
-	@ar rc $(NAME) $(SRCSO)
+$(NAME) : $(OBJ)
+	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
+%.o: %.c
+			$(CC) $(FLAGS) -g -o $@ -c $< 
+
 clean :
-	@/bin/rm -f $(SRCSO)
+	@/bin/rm -f $(OBJ)
 	@/bin/rm -f a.out
 	@/bin/rm -f *~
 
@@ -96,4 +99,4 @@ git :
 	@git commit -m "$(COMMIT)"
 	git push $(ORG)
 
-.PHONY : all $(NAME) clean fclean re git
+.PHONY : all clean fclean re git
