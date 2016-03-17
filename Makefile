@@ -71,7 +71,7 @@ SRCS = ft_memset.c \
 
 OBJ = $(SRCS:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -c
+FLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
